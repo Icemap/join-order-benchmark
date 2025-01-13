@@ -11,14 +11,16 @@ The `csv_files/schematext.sql` and `queries/*.sql` are modified to MySQL syntax.
 
 ## Quick Start
 
-1. Obtain the data:
-```shell
+1. Get the `imdb` dataset:
+```bash
 cd csv_files/
-wget http://homepages.cwi.nl/~boncz/job/imdb.tgz
+wget https://event.cwi.nl/da/job/imdb.tgz
 tar -xvzf imdb.tgz
 ```
-
-2. Launch the database server.
+2. Create the database `imdbload`:
+```bash
+csv_files/schema-tidb.sql
+```
 3. Run the script:
 ```
 ./load_data.sh
