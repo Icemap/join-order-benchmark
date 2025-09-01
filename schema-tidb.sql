@@ -1,4 +1,7 @@
-CREATE TABLE aka_name (
+CREATE DATABASE IF NOT EXISTS imdbload;
+USE imdbload;
+
+CREATE TABLE IF NOT EXISTS aka_name (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     person_id INT NOT NULL,
     name VARCHAR(255),
@@ -9,7 +12,7 @@ CREATE TABLE aka_name (
     md5sum VARCHAR(65)
 );
 
-CREATE TABLE aka_title (
+CREATE TABLE IF NOT EXISTS aka_title (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     movie_id INT NOT NULL,
     title VARCHAR(255),
@@ -24,7 +27,7 @@ CREATE TABLE aka_title (
     md5sum VARCHAR(32)
 );
 
-CREATE TABLE cast_info (
+CREATE TABLE IF NOT EXISTS cast_info (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     person_id INT NOT NULL,
     movie_id INT NOT NULL,
@@ -34,7 +37,7 @@ CREATE TABLE cast_info (
     role_id INT NOT NULL
 );
 
-CREATE TABLE char_name (
+CREATE TABLE IF NOT EXISTS char_name (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     imdb_index VARCHAR(2),
@@ -44,12 +47,12 @@ CREATE TABLE char_name (
     md5sum VARCHAR(32)
 );
 
-CREATE TABLE comp_cast_type (
+CREATE TABLE IF NOT EXISTS comp_cast_type (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     kind VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE company_name (
+CREATE TABLE IF NOT EXISTS company_name (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     country_code VARCHAR(6),
@@ -59,40 +62,40 @@ CREATE TABLE company_name (
     md5sum VARCHAR(32)
 );
 
-CREATE TABLE company_type (
+CREATE TABLE IF NOT EXISTS company_type (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     kind VARCHAR(32)
 );
 
-CREATE TABLE complete_cast (
+CREATE TABLE IF NOT EXISTS complete_cast (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     movie_id INT,
     subject_id INT NOT NULL,
     status_id INT NOT NULL
 );
 
-CREATE TABLE info_type (
+CREATE TABLE IF NOT EXISTS info_type (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     info VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE keyword (
+CREATE TABLE IF NOT EXISTS keyword (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     keyword VARCHAR(255) NOT NULL,
     phonetic_code VARCHAR(5)
 );
 
-CREATE TABLE kind_type (
+CREATE TABLE IF NOT EXISTS kind_type (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     kind VARCHAR(15)
 );
 
-CREATE TABLE link_type (
+CREATE TABLE IF NOT EXISTS link_type (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     link VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE movie_companies (
+CREATE TABLE IF NOT EXISTS movie_companies (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     movie_id INT NOT NULL,
     company_id INT NOT NULL,
@@ -100,7 +103,7 @@ CREATE TABLE movie_companies (
     note VARCHAR(255)
 );
 
-CREATE TABLE movie_info_idx (
+CREATE TABLE IF NOT EXISTS movie_info_idx (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     movie_id INT NOT NULL,
     info_type_id INT NOT NULL,
@@ -108,20 +111,20 @@ CREATE TABLE movie_info_idx (
     note VARCHAR(1)
 );
 
-CREATE TABLE movie_keyword (
+CREATE TABLE IF NOT EXISTS movie_keyword (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     movie_id INT NOT NULL,
     keyword_id INT NOT NULL
 );
 
-CREATE TABLE movie_link (
+CREATE TABLE IF NOT EXISTS movie_link (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     movie_id INT NOT NULL,
     linked_movie_id INT NOT NULL,
     link_type_id INT NOT NULL
 );
 
-CREATE TABLE name (
+CREATE TABLE IF NOT EXISTS name (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     imdb_index VARCHAR(9),
@@ -133,12 +136,12 @@ CREATE TABLE name (
     md5sum VARCHAR(32)
 );
 
-CREATE TABLE role_type (
+CREATE TABLE IF NOT EXISTS role_type (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     role VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE title (
+CREATE TABLE IF NOT EXISTS title (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     imdb_index VARCHAR(5),
@@ -153,7 +156,7 @@ CREATE TABLE title (
     md5sum VARCHAR(32)
 );
 
-CREATE TABLE movie_info (
+CREATE TABLE IF NOT EXISTS movie_info (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     movie_id INT NOT NULL,
     info_type_id INT NOT NULL,
@@ -161,7 +164,7 @@ CREATE TABLE movie_info (
     note VARCHAR(255)
 );
 
-CREATE TABLE person_info (
+CREATE TABLE IF NOT EXISTS person_info (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     person_id INT NOT NULL,
     info_type_id INT NOT NULL,

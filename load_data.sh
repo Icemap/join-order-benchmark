@@ -8,6 +8,20 @@ mkfifo $tempfifo
 exec 1000<>$tempfifo
 rm -rf $tempfifo
 
+MYSQL_HOST=${MYSQL_HOST:-127.0.0.1}
+MYSQL_PORT=${MYSQL_PORT:-4000}
+MYSQL_USER=${MYSQL_USER:-root}
+MYSQL_PSWD=${MYSQL_PSWD:-}
+DB_NAME=imdbload
+
+# Create database and schema
+COMMON_ARGS=(--protocol tcp -h"${MYSQL_HOST}" --port "${MYSQL_PORT}" -u"${MYSQL_USER}")
+if [ -n "${MYSQL_PSWD}" ]; then
+  COMMON_ARGS+=( -p"${MYSQL_PSWD}" )
+fi
+
+mysql "${COMMON_ARGS[@]}" < schema-tidb.sql | cat
+
 for ((i=1; i<=$TASKNUM; i++))
 do
     echo >&1000
@@ -20,13 +34,10 @@ load_data() {
     read -u1000
 
     bname=${csv_file%.*}
-    sql_file="$bname.sql"
     table=${bname#$PREFIX}
     sql="LOAD DATA LOCAL INFILE '$csv_file' INTO TABLE $table FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"';"
-    echo $sql > $sql_file
-    echo $sql_file
     {
-       mysql --local-infile=1 -h 127.0.0.1 -P 4000 -u root -D imdbload < $sql_file
+       mysql --local-infile=1 "${COMMON_ARGS[@]}" -D imdbload -e "$sql"
        echo >&1000
     }& 
   done
