@@ -158,6 +158,8 @@ load_all_data() {
         done
         return 1
     else
+        echo "Analyzing tables..."
+        mysql "${COMMON_ARGS[@]}" -D "$DB_NAME" < analyze_table.sql
         echo "All files loaded successfully!"
         return 0
     fi
