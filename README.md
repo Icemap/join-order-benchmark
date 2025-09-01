@@ -5,9 +5,7 @@ This package contains the Join Order Benchmark (JOB) queries from:
 by Viktor Leis, Andrey Gubichev, Atans Mirchev, Peter Boncz, Alfons Kemper, Thomas Neumann
 PVLDB Volume 9, No. 3, 2015
 
-
 The `csv_files/schematext.sql` and `queries/*.sql` are modified to MySQL syntax.
-
 
 ## Quick Start
 
@@ -28,11 +26,3 @@ The `csv_files/schematext.sql` and `queries/*.sql` are modified to MySQL syntax.
 ## Order Problem
 
 Please note that `queries/17b.sql` and `queries/8d.sql` may exhibit order issues due to the use of different order rules from MySQL. This is not a real bug.
-
-## Improving TiDB Performance using Analyze Table
-
-Please execute `analyze_table.sql` to optimize the TiDB performance.
-
-```bash
-mysql -u root -h 127.0.0.1 -P 4000 -D imdbload < analyze_table.sql
-```
